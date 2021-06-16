@@ -8,7 +8,7 @@ describe('Token', function () {
   let Token, token, Faucet ,dev, alice, bob, eve;
 
   const NAME = 'SAGISTAMI';
-  //const FAUCET_NAME = "Faucet"
+  const FAUCET_NAME = "Faucet"
   const SYMBOL = 'SGSA';
   const INITIAL_SUPPLY = ethers.utils.parseEther('8000');
 
@@ -45,14 +45,14 @@ describe('Token', function () {
         expect(await token.connect(dev).balanceOf(dev.address)).to.equal(INITIAL_SUPPLY);
       });
     });
-    // describe('approval', function () {
-    //   it('approve', async function () {
-    //     Faucet = await ethers.getContractFactory('Faucet');
-    //     faucet = await Faucet.connect(dev).deploy(token.address, NAME_ICO);
-    //     await faucet.deployed();
-    //     await token.approve(faucet.address, ethers.utils.parseEther('2000000000'));
-    //     expect(await token.allowance(dev.address, faucet.address)).to.equal(ethers.utils.parseEther('2000000000'));
-    //   });
-    // });
+    describe('approval', function () {
+      it('approve', async function () {
+        Faucet = await ethers.getContractFactory('Faucet');
+        faucet = await Faucet.connect(dev).deploy(token.address, FAUCET_NAME);
+        await faucet.deployed();
+        await token.approve(faucet.address, INITIAL_SUPPLY);
+        expect(await token.allowance(dev.address, faucet.address)).to.equal(ethers.utils.parseEther('8000'));
+      });
+    });
   });
 });
