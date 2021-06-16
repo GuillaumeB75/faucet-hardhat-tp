@@ -16,15 +16,15 @@ async function main() {
   console.log('Deploying contracts with the account:', deployer.address);
 
   // We get the contract to deploy
-  const Faucet = await hre.ethers.getContractFactory('Faucet');
-  const faucet = await Faucet.deploy('Hello, Hardhat!');
+  const Token = await hre.ethers.getContractFactory('Token');
+  const token = await Token.deploy('Hello, Hardhat!');
 
   // Attendre que le contrat soit réellement déployé, cad que la transaction de déploiement
   // soit incluse dans un bloc
-  await faucet.deployed();
+  await token.deployed();
 
   // Create/update deployed.json and print usefull information on the console.
-  await deployed('Faucet', hre.network.name, faucet.address);
+  await deployed('Token', hre.network.name, token.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

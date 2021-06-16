@@ -6,12 +6,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 /**
-*@dev tptoken is {Ownable}, {ERC20}
+ *@dev Token is {Ownable}, {ERC20}
  */
 
-contract Faucet is Ownable, ERC20 {
-
-        /**
+contract Token is Ownable, ERC20 {
+    /**
      * @dev Sets the values for {name} and {symbol}.
      *
      * The default value of {decimals} is 18. To select a different value for
@@ -20,7 +19,7 @@ contract Faucet is Ownable, ERC20 {
      * All two of these values are immutable: they can only be set once during
      * construction.
      */
-     
+
     constructor(
         string memory name_,
         string memory symbol_,
