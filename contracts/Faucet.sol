@@ -12,10 +12,13 @@ contract Faucet {
     uint256 private _tokenAmount = 100;
 
     event Bought (address indexed sender, uint256 amount);
+    event Deployed (string name);
 
-    constructor (address tokenAddress_, string memory name_ ) {
+
+    constructor(address tokenAddress_, string memory name_ ) {
         _token = Token(tokenAddress_);
         _name = name_;
+        emit Deployed (_name);
     }
 
     function sendToken () public {
