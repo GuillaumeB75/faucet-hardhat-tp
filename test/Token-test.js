@@ -8,7 +8,7 @@ describe('Token', function () {
   let Token, token, Faucet ,dev, alice, bob, eve;
 
   const NAME = 'SAGISTAMI';
-  const FAUCET_NAME = "Faucet"
+  const FAUCET_NAME = "Faucet";
   const SYMBOL = 'SGSA';
   const INITIAL_SUPPLY = ethers.utils.parseEther('8000');
 
