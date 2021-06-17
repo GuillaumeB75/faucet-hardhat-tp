@@ -3,7 +3,15 @@
 const hre = require('hardhat');
 const { deployed } = require('./deployed');
 const FAUCET_NAME = 'Faucet';
-const TOKEN_ADDRESS = '0xdbd75180D347Cd4A17AA7a987c90081adB2E0c7a';
+const FILE_PATH = '../deployed.json';
+
+  try {
+    jsonString = await readFile(FILE_PATH, 'utf-8');
+    obj = JSON.parse(jsonString);
+    const TOKEN_ADDRESS = Token.rinkeby.address;
+  } catch (e) {
+    console.log(e)
+  }
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command

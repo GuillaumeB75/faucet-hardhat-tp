@@ -1,5 +1,6 @@
 /* eslint-disable space-before-function-paren */
 /* eslint-disable no-undef */
+const { readFile, writeFile } = require('fs/promises');
 const hre = require('hardhat');
 const { deployed } = require('./deployed');
   const NAME = 'SAGISTAMI';
