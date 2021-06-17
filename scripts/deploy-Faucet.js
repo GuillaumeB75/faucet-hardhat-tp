@@ -1,17 +1,23 @@
 /* eslint-disable space-before-function-paren */
 /* eslint-disable no-undef */
+const { readFile, writeFile } = require('fs/promises');
 const hre = require('hardhat');
 const { deployed } = require('./deployed');
 const FAUCET_NAME = 'Faucet';
-const FILE_PATH = '../deployed.json';
+const FILE_PATH = './deployed.json';
 
+const checkDeploy = async () => {
   try {
     jsonString = await readFile(FILE_PATH, 'utf-8');
     obj = JSON.parse(jsonString);
-    const TOKEN_ADDRESS = Token.rinkeby.address;
+    
+    return obj.Token.rinkeby.address;
+    
   } catch (e) {
     console.log(e)
   }
+}
+const TOKEN_ADDRESS = checkDeploy()
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -26,6 +32,7 @@ async function main() {
   console.log('Deploying contracts with the account:', deployer.address);
 
   // We get the contract to deploy
+  console.log(TOKEN_ADDRESS)
   const Faucet = await hre.ethers.getContractFactory('Faucet');
   const faucet = await Faucet.deploy(TOKEN_ADDRESS, FAUCET_NAME);
 
