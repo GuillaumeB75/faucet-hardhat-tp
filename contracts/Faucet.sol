@@ -12,7 +12,7 @@ contract Faucet {
     uint256 private _tokenAmount = 100**18;
     mapping (address => uint256) private _timeLapse;
 
-    event Bought (address indexed sender, uint256 amount);
+    event Bought (address indexed sender, uint256 amount, uint256 timeLapse);
     event Deployed (string name);
 
 
@@ -31,7 +31,7 @@ contract Faucet {
             _timeLapse[msg.sender] = block.timestamp;
         }
         _token.transferFrom(_token.owner(), msg.sender, _tokenAmount);
-        emit Bought (msg.sender, _tokenAmount);
+        emit Bought (msg.sender, _tokenAmount , _timeLapse[msg.sender]);
     }
 
     function allowance () public view {

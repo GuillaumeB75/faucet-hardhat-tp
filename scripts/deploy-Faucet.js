@@ -10,14 +10,13 @@ const checkDeploy = async () => {
   try {
     jsonString = await readFile(FILE_PATH, 'utf-8');
     obj = JSON.parse(jsonString);
-    
+
     return obj.Token.rinkeby.address;
-    
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
-}
-const TOKEN_ADDRESS = checkDeploy()
+};
+const TOKEN_ADDRESS = checkDeploy();
 
 async function main() {
   // Hardhat always runs the compile task when running scripts with its command
@@ -32,7 +31,6 @@ async function main() {
   console.log('Deploying contracts with the account:', deployer.address);
 
   // We get the contract to deploy
-  console.log(TOKEN_ADDRESS)
   const Faucet = await hre.ethers.getContractFactory('Faucet');
   const faucet = await Faucet.deploy(TOKEN_ADDRESS, FAUCET_NAME);
 
@@ -42,6 +40,11 @@ async function main() {
 
   // Create/update deployed.json and print usefull information on the console.
   await deployed('Faucet', hre.network.name, faucet.address);
+
+  const Token = await hre.ethers.getContractFactory('Token');
+  const token = await Token.attach(TOKEN_ADDRESS);
+  await token.connect(deployer).approve(faucet.address, token.totalSupply());
+  console.log('approve totalSupply with account', deployer.address);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
